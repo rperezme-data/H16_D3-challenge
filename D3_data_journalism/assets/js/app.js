@@ -1,19 +1,18 @@
 // 1. CHART SETUP
-// Pending: test different chart sizes
+// Pending: test different chart sizes & margins
 
-var svgWidth = 640; //960
+var svgWidth = 800; //960
 var svgHeight = 480;
 
 var margin = {
-    top: 20,
+    top: 50,
     right: 20,
     left: 20,
-    bottom: 20
+    bottom: 50
 }
 
 var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
-
 
 // 2. SVG WRAPPER
 
@@ -25,12 +24,20 @@ var svg = d3.select("#scatter")
 var chartGroup = svg.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-
 // 3. LOAD DATA
 
-// d3.csv("assets/data/data.csv").then((censusData) => {
+d3.csv("assets/data/data.csv").then((censusData) => {
 
-//     console.log("Census data: ", censusData);
+    // Parse data (types)
+    censusData.forEach((data) => {
+        data.poverty = +data.poverty;
+        data.healthcare = +data.healthcare;
+    })
+  
+    // --DEBUG--
 
+    console.log("Census data: ", censusData);
+    console.log("Poverty: ", censusData.map(d => d.poverty));
+    console.log("Healthcare: ", censusData.map(d => d.healthcare));
 
-// });
+});
