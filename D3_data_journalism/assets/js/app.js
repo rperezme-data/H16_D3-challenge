@@ -33,7 +33,25 @@ d3.csv("assets/data/data.csv").then((censusData) => {
         data.poverty = +data.poverty;
         data.healthcare = +data.healthcare;
     })
-  
+
+    // 4. SCALES SETUP
+
+    var xPovertyLinSc = d3.scaleLinear()
+        .domain([d3.min(censusData, d => d.poverty)-1, d3.max(censusData, d => d.poverty)+1])
+        .range([0, width]);
+
+    var yHealthcareLinSc = d3.scaleLinear()
+        .domain([d3.min(censusData, d => d.healthcare)-1, d3.max(censusData, d => d.healthcare)+1])
+        .range([height, 0]);   // Invert Y axis
+
+    // 5. AXES SETUP
+
+    var bottomAxis = d3.axisBottom(xPovertyLinSc);
+    var leftAxis = d3.axisLeft(yHealthcareLinSc);
+
+    chartGroup.append("g").attr("transform", `translate(0, ${height})`).call(bottomAxis);
+    chartGroup.append("g").call(leftAxis);
+
     // --DEBUG--
 
     console.log("Census data: ", censusData);
