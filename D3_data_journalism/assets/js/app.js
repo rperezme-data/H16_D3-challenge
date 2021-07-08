@@ -268,16 +268,15 @@ d3.csv("assets/data/data.csv").then(function (censusData, err) {
                 // replaces chosenXAxis with value
                 chosenXAxis = value;
 
-                // console.log(chosenXAxis)   // DEBUG
+                console.log(chosenXAxis);   // DEBUG
 
                 // functions here found above csv import
                 // updates x scale for new data
                 xLinearScale = xScale(censusData, chosenXAxis);
-                // yLinearScale = yScale(censusData, chosenYAxis);
 
                 // updates x axis with transition
-                // xAxis = renderXAxes(xLinearScale, xAxis);
-                // yAxis = renderYAxes(yLinearScale, yAxis);
+                xAxis = renderXAxes(xLinearScale, xAxis);
+
 
                 // updates circles with new x values
                 circlesGroup = renderXCircles(circlesGroup, xLinearScale, chosenXAxis);
@@ -336,16 +335,14 @@ d3.csv("assets/data/data.csv").then(function (censusData, err) {
                 // replaces chosenYAxis with value
                 chosenYAxis = value;
 
-                console.log(chosenYAxis)   // DEBUG
+                console.log(chosenYAxis);   // DEBUG
 
                 // functions here found above csv import
                 // updates x scale for new data
                 yLinearScale = yScale(censusData, chosenYAxis);
-                // yLinearScale = yScale(censusData, chosenYAxis);
 
                 // updates x axis with transition
-                // xAxis = renderXAxes(xLinearScale, xAxis);
-                // yAxis = renderYAxes(yLinearScale, yAxis);
+                yAxis = renderYAxes(yLinearScale, yAxis);
 
                 // updates circles with new x values
                 circlesGroup = renderYCircles(circlesGroup, yLinearScale, chosenYAxis);
