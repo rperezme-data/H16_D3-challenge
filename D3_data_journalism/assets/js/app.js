@@ -89,7 +89,20 @@ function renderXCircles(circlesGroup, newXScale, chosenXAxis) {
     return circlesGroup;
 }
 
-// Pending: renderCircles Y
+
+// UPDATE CIRCLES-GROUP FUNCTION (transition to new circles)
+function renderYCircles(circlesGroup, newYScale, chosenYAxis) {
+
+    circlesGroup.transition()
+        .duration(1000)
+        .attr("cy", d => newYScale(d[chosenYAxis]));
+
+    return circlesGroup;
+}
+
+
+
+
 
 
 // UPDATE CIRCLES-GROUP FUNCTION (update to new tooltip)
