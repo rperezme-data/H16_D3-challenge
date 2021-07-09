@@ -52,6 +52,10 @@
   border-radius: 4px;
 }
 
+hr.tooltip-hr {
+  border: 1px solid red;
+}
+
 /* Mobile Rules */
 @media screen and (max-width: 530px) {
   .stateText {

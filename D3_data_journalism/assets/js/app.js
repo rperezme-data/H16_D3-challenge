@@ -103,54 +103,52 @@ function renderYCircles(circlesGroup, newYScale, chosenYAxis) {
 
 
 
-
-
 // UPDATE CIRCLES-GROUP FUNCTION (update to new tooltip)
-// function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
+function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
 
-//     // Pending: improve to inline IF
-//     var xlabel;
+    // Pending: improve to inline IF
+    var xlabel;
 
-//     if (chosenXAxis === "poverty") {
-//         xlabel = "In Poverty:";
-//     }
-//     else if (chosenXAxis === "age") {
-//         xlabel = "Age: ";
-//     } else {
-//         xlabel = "Household Income:";
-//     }
+    if (chosenXAxis === "poverty") {
+        xlabel = "Poverty:";
+    }
+    else if (chosenXAxis === "age") {
+        xlabel = "Age: ";
+    } else {
+        xlabel = "Income:";
+    }
 
-//     var ylabel;
+    var ylabel;
 
-//     if (chosenYAxis === "healthcare") {
-//         ylabel = "Lacks Healthcare:";
-//     }
-//     else if (chosenYAxis === "smokes") {
-//         ylabel = "Smokes:";
-//     } else {
-//         ylabel = "Obese:";
-//     }
+    if (chosenYAxis === "healthcare") {
+        ylabel = "Lacks Healthcare:";
+    }
+    else if (chosenYAxis === "smokes") {
+        ylabel = "Smokes:";
+    } else {
+        ylabel = "Obese:";
+    }
 
-//     var toolTip = d3.tip()
-//         .attr("class", "tooltip")
-//         .offset([80, -60])
-//         .html(function (d) {
-//             return (`${d.state}<br>${xlabel} ${d[chosenXAxis]}<br>${ylabel} ${d[chosenYAxis]}%`);
-//         });
+    var toolTip = d3.tip()
+        .attr("class", "d3-tip")
+        .offset([80, -60])
+        .html(function (d) {
+            return (`<strong style="color:#FF7A59">${d.state}</strong><br>${xlabel} ${d[chosenXAxis]}<br>${ylabel} ${d[chosenYAxis]}%`);
+        });
 
-//     circlesGroup.call(toolTip);
+    circlesGroup.call(toolTip);
 
 
-//     circlesGroup.on("mouseover", function (data) {
-//         toolTip.show(data);
-//     })
-//         // onmouseout event
-//         .on("mouseout", function (data, index) {
-//             toolTip.hide(data);
-//         });
+    circlesGroup.on("mouseover", function (data) {
+        toolTip.show(data);
+    })
+        // onmouseout event
+        .on("mouseout", function (data, index) {
+            toolTip.hide(data);
+        });
 
-//     return circlesGroup;
-// }
+    return circlesGroup;
+}
 
 
 
@@ -255,7 +253,7 @@ d3.csv("assets/data/data.csv").then(function (censusData, err) {
 
 
     // updateToolTip function above csv import
-    // var circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
+    var circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
 
 
     // x axis labels event listener
@@ -282,7 +280,7 @@ d3.csv("assets/data/data.csv").then(function (censusData, err) {
                 circlesGroup = renderXCircles(circlesGroup, xLinearScale, chosenXAxis);
 
                 // updates tooltips with new info
-                // circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
+                circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
 
                 // changes classes to change bold text
                 if (chosenXAxis === "poverty") {
@@ -348,7 +346,7 @@ d3.csv("assets/data/data.csv").then(function (censusData, err) {
                 circlesGroup = renderYCircles(circlesGroup, yLinearScale, chosenYAxis);
 
                 // updates tooltips with new info
-                // circlesGroup = updateToolTip(chosenYAxis, circlesGroup);
+                circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
 
                 // changes classes to change bold text
                 if (chosenYAxis === "obesity") {
