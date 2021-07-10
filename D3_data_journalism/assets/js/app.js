@@ -36,7 +36,7 @@ function xScale(censusData, chosenXAxis) {
 
     // Create scale
     var xLinearScale = d3.scaleLinear()
-        .domain([d3.min(censusData, d => d[chosenXAxis]) * 0.8, d3.max(censusData, d => d[chosenXAxis]) * 1.2])
+        .domain([d3.min(censusData, d => d[chosenXAxis]) * 0.9, d3.max(censusData, d => d[chosenXAxis]) * 1.1])
         .range([0, width]);
 
     return xLinearScale;
@@ -48,7 +48,7 @@ function yScale(censusData, chosenYAxis) {
 
     // Create scale
     var yLinearScale = d3.scaleLinear()
-        .domain([d3.min(censusData, d => d[chosenYAxis]) * 0.8, d3.max(censusData, d => d[chosenYAxis]) * 1.2])
+        .domain([d3.min(censusData, d => d[chosenYAxis]) * 0.9, d3.max(censusData, d => d[chosenYAxis]) * 1.1])
         .range([height, 0]);   // Invert Y axis
 
     return yLinearScale;
@@ -85,6 +85,8 @@ function renderXCircles(circlesGroup, newXScale, chosenXAxis) {
     circlesGroup.transition()
         .duration(1000)
         .attr("cx", d => newXScale(d[chosenXAxis]));
+
+
 
     return circlesGroup;
 }
@@ -131,7 +133,7 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
 
     var toolTip = d3.tip()
         .attr("class", "d3-tip")
-        .offset([80, -60])
+        .offset([40, 90])
         .html(function (d) {
             return (`<strong style="color:#FF7A59">${d.state}</strong><br>${xlabel} ${d[chosenXAxis]}<br>${ylabel} ${d[chosenYAxis]}%`);
         });
@@ -140,7 +142,7 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
 
 
     circlesGroup.on("mouseover", function (data) {
-        toolTip.show(data);
+        toolTip.show(data)
     })
         // onmouseout event
         .on("mouseout", function (data, index) {
@@ -186,14 +188,39 @@ d3.csv("assets/data/data.csv").then(function (censusData, err) {
         .call(leftAxis);
 
     // append initial circles
-    var circlesGroup = chartGroup.selectAll("circle")
+    var circlesGroup = chartGroup.append("g")
+        .selectAll("circle")
         .data(censusData)
         .enter()
         .append("circle")
         .attr("cx", d => xLinearScale(d[chosenXAxis]))
         .attr("cy", d => yLinearScale(d[chosenYAxis]))
-        .attr("r", 10)
-        .classed("stateCircle", true);
+        .attr("r", 12)
+        .classed("stateCircle", true)
+        .classed("inactive-circle", true);
+
+    // var textGroup = chartGroup.append("g")
+    //     .selectAll("text")
+    //     .data(censusData)
+    //     .enter()
+    //     .append("text")
+    //     .attr("x", (d) => xLinearScale(d[chosenXAxis]))
+    //     .attr("y", (d) => yLinearScale(d[chosenYAxis]))
+    //     // .attr("dx", "-0.7em")
+    //     .attr("dy", "0.4em")
+    //     // .attr("font-size", 12)
+    //     // .attr("font-weight", "bold")
+    //     .classed("stateText", true)
+    //     .text((d) => d.abbr);
+
+
+
+    // .on("mouseover", function() {
+    //     d3.select(this).classed("inactive",true);
+    // })
+
+
+
     // .attr("fill", "pink")
     // .attr("opacity", ".5");
 

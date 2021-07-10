@@ -23,6 +23,15 @@
   cursor: pointer;
 }
 
+.inactive-circle:hover {
+  fill: #FF7A59;
+  opacity: 0.90;
+  stroke: #000;
+  stroke-width: 1;
+  stroke-opacity: 1;
+  cursor: pointer;
+}
+
 /* font size dependent on radius, see app.js */
 .stateText {
   font-family: sans-serif;
@@ -32,6 +41,8 @@
 
 .stateCircle {
   fill: #89bdd3;
+  /* fill: navy; */
+  opacity: 1;
   stroke: #e3e3e3;
 }
 
@@ -51,6 +62,20 @@
   background: rgba(0, 0, 0, 0.8);
   border-radius: 4px;
 }
+
+/* Creates a small triangle extender for the tooltip
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+} */
+
 
 hr.tooltip-hr {
   border: 1px solid red;
