@@ -1,5 +1,5 @@
-// 1. CHART SETUP
-// Pending: test different chart sizes & margins
+// CHART SETUP
+// Pending: test window-size responsive
 
 var svgWidth = 800;
 var svgHeight = 600;
@@ -14,23 +14,24 @@ var margin = {
 var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
-// 2. SVG SETUP
 
-// Create SVG WRAPPER
+// SVG SETUP
+// SVG wrapper
 var svg = d3.select("#scatter")
     .append("svg")
     .attr("width", svgWidth)
     .attr("height", svgHeight);
 
-// Append SVG group
+// SVG group
 var chartGroup = svg.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-// Initial Params
+// Default parameters
 var chosenXAxis = "poverty";
 var chosenYAxis = "healthcare";
 
 
+// UPDATE FUNCTIONS
 // UPDATE X-SCALE FUNCTION (upon click on axis label)
 function xScale(censusData, chosenXAxis) {
 
@@ -85,12 +86,8 @@ function renderXCircles(circlesGroup, newXScale, chosenXAxis) {
     circlesGroup.transition()
         .duration(1000)
         .attr("cx", d => newXScale(d[chosenXAxis]));
-
-
-
     return circlesGroup;
 }
-
 
 // UPDATE CIRCLES-GROUP FUNCTION (transition to new circles)
 function renderYCircles(circlesGroup, newYScale, chosenYAxis) {
@@ -103,9 +100,29 @@ function renderYCircles(circlesGroup, newYScale, chosenYAxis) {
 }
 
 
+// UPDATE TEXT-GROUP FUNCTION (transition to new circles)
+function renderXText(textGroup, newXScale, chosenXAxis) {
+
+    textGroup.transition()
+        .duration(1000)
+        .attr("x", d => newXScale(d[chosenXAxis]));
+    return textGroup;
+}
+
+// UPDATE TEXT-GROUP FUNCTION (transition to new circles)
+function renderYText(textGroup, newYScale, chosenYAxis) {
+
+    textGroup.transition()
+        .duration(1000)
+        .attr("y", d => newYScale(d[chosenYAxis]));
+
+    return textGroup;
+}
 
 
-// UPDATE CIRCLES-GROUP FUNCTION (update to new tooltip)
+
+
+// UPDATE TOOLTIP FUNCTION (update to new tooltip)
 function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
 
     // Pending: improve to inline IF
@@ -195,23 +212,20 @@ d3.csv("assets/data/data.csv").then(function (censusData, err) {
         .append("circle")
         .attr("cx", d => xLinearScale(d[chosenXAxis]))
         .attr("cy", d => yLinearScale(d[chosenYAxis]))
-        .attr("r", 12)
+        .attr("r", 11)
         .classed("stateCircle", true)
         .classed("inactive-circle", true);
 
-    // var textGroup = chartGroup.append("g")
-    //     .selectAll("text")
-    //     .data(censusData)
-    //     .enter()
-    //     .append("text")
-    //     .attr("x", (d) => xLinearScale(d[chosenXAxis]))
-    //     .attr("y", (d) => yLinearScale(d[chosenYAxis]))
-    //     // .attr("dx", "-0.7em")
-    //     .attr("dy", "0.4em")
-    //     // .attr("font-size", 12)
-    //     // .attr("font-weight", "bold")
-    //     .classed("stateText", true)
-    //     .text((d) => d.abbr);
+    var textGroup = chartGroup.append("g")
+        .selectAll("text")
+        .data(censusData)
+        .enter()
+        .append("text")
+        .attr("x", (d) => xLinearScale(d[chosenXAxis]))
+        .attr("y", (d) => yLinearScale(d[chosenYAxis]))
+        .attr("dy", "0.4em")
+        .classed("stateText", true)
+        .text((d) => d.abbr);
 
 
 
@@ -302,9 +316,11 @@ d3.csv("assets/data/data.csv").then(function (censusData, err) {
                 // updates x axis with transition
                 xAxis = renderXAxes(xLinearScale, xAxis);
 
-
                 // updates circles with new x values
                 circlesGroup = renderXCircles(circlesGroup, xLinearScale, chosenXAxis);
+
+
+                textGroup = renderXText(textGroup, xLinearScale, chosenXAxis);
 
                 // updates tooltips with new info
                 circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
@@ -371,6 +387,9 @@ d3.csv("assets/data/data.csv").then(function (censusData, err) {
 
                 // updates circles with new x values
                 circlesGroup = renderYCircles(circlesGroup, yLinearScale, chosenYAxis);
+
+
+                textGroup = renderYText(textGroup, yLinearScale, chosenYAxis);
 
                 // updates tooltips with new info
                 circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
