@@ -33,15 +33,14 @@
 }
 
 .stateCircle {
-  fill: #0000CD	;
-  opacity: 0.70;
+  fill: #4169E1	;
+  opacity: 0.80;
   stroke: #e3e3e3;
 }
 
 .inactive-circle:hover {
-  /* fill: #FF7A59; */
   fill: #FF0000;
-  opacity: 0.80;
+  opacity: 0.70;
   stroke: #000;
   stroke-width: 1;
   stroke-opacity: 1;
@@ -64,20 +63,6 @@
   background: rgba(0, 0, 0, 0.8);
   border-radius: 4px;
 }
-
-/* Creates a small triangle extender for the tooltip
-.d3-tip:after {
-  box-sizing: border-box;
-  display: inline;
-  font-size: 10px;
-  width: 100%;
-  line-height: 1;
-  color: rgba(0, 0, 0, 0.8);
-  content: "\25BC";
-  position: absolute;
-  text-align: center;
-} */
-
 
 hr.tooltip-hr {
   border: 1px solid red;
