@@ -17,7 +17,7 @@ This web application was built using HTML for the webpage elements and JavaScrip
     + Data points position is updated 
     + Ticks scale is updated
 3. Tooltip (upon data point selection)
-    + Full state name
+    + Full name
     + Selected axes variable name & value
     + Selected data point is highlighted
 
