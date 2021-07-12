@@ -7,6 +7,8 @@ The scope of this project is to showcase an interactive scatter plot with dynami
 ### Script Summary
 This web application was built using HTML for the webpage elements and JavaScript, D3 & CSS to load the dataset and to render the SVG interactive scatter plot with transitions.
 
+![Transitions](D3_data_journalism/images/transitions.gif)
+
 ### Features
 
 1. Abc
