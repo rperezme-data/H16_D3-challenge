@@ -1,4 +1,3 @@
-# D3-challenge
 ## Web App: Interactive Data Visualization Dynamic Plot
 
 ### Description
