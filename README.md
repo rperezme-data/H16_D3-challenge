@@ -1,4 +1,4 @@
-## Web App: Interactive Data Visualization Dynamic Plot
+# Web App: Interactive Data Visualization Dynamic Plot
 
 ### Description
 The scope of this project is to showcase an interactive scatter plot with dynamic transitions to convey data in a visually compelling way. This plot is a tool to display the relationship between multiple socio-demographic variables and multiple health risk factors where each circle represents each US state. The [dataset](D3_data_journalism/assets/data/data.csv) is based on 2014 ACS 1-year estimates from the US Census Bureau and includes rates of income, obesity, poverty, etc.
