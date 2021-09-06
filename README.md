@@ -22,7 +22,7 @@ This web application was built using HTML for the webpage elements and JavaScrip
 
 <img src="D3_data_journalism/images/tooltip.gif" alt="Tooltip" height="400">
 
-### [Explore the Scatter Plot!](https://rperezme-data.github.io/H16_D3-challenge/D3_data_journalism/)
+### [Explore the Scatter Plot!](https://rperezme-data.github.io/Interactive-Dynamic-Plot/D3_data_journalism/)
 <br>
 
 --- 
